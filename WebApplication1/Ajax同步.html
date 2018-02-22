@@ -12,7 +12,11 @@
 
     <input id="Button3" type="button" onclick="GetAsyncPost()" value="AsyncPost" />
 
+    <input id="Button4" type="button" onclick="GetjQuery()" value="jQuery" />
+
     <img id="Progress" style="display:none;" src="images/ajax-loader .gif" />
+
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
 
     <script>
         function GetAsync() {
@@ -60,14 +64,16 @@
 
                     document.getElementById("MyDiv").innerText = xmlHttp.responseText;
 
-                    document.getElementById("Progress").style.display = "none";
+                    document.getElementById("Progress").style.display = "none";//loading圖
 
                 }
+
                 xmlHttp.open("POST", "http://localhost:51513/Handler1.ashx", true); //method url asyncFlag
 
                 xmlHttp.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 
-                document.getElementById("Progress").style.display = "inline";
+                document.getElementById("Progress").style.display = "inline";//loading圖
+
                 xmlHttp.send(p);
 
 
@@ -76,6 +82,20 @@
                 alert("您的瀏覽器不支援Ajax")
             }
         };
+
+        function GetjQuery() {
+            var p = "Name=李小明&Age=20";
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:51513/Handler1.ashx?" + p
+            }).done(function (result) {
+                $("#MyDiv").text(result);
+            }).fail(function (err) {
+                alert(err.responseText);
+
+            });
+
+        }
     </script>
 </body>
 </html>
