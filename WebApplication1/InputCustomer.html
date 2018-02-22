@@ -5,9 +5,32 @@
     <title></title>
 </head>
 <body>
-    <input id="Text" type="text" onkeyup="CheckCustomerID()" />
+    <input id="CustomerID" type="text" onkeyup="CheckCustomerID()" />
     <br />
-    <img src="images/ajax-loader .gif" />
+    <img id="Progress" src="images/ajax-loader .gif" style="display:none" />
     <p id="result"></p>
+    <script src="Scripts/jquery-3.3.1.min.js"></script>
+
+    <script>
+        function CheckCustomerID() {
+            var Progress = $("#Progress");
+
+            Progress.show();
+            $.ajax({
+                type: "GET",
+                data: {
+                    CustomerID:$("#CustomerID").val()
+                },
+                url: "http://localhost:51513/CustomersHandler.ashx"
+
+            }).done(function (result) {
+                Progress.hide();
+            $("#result").text(result);
+            }).fail(function (err) {
+                Progress.hide();
+            alert(err.responseText);
+            });
+        }
+    </script>
 </body>
 </html>

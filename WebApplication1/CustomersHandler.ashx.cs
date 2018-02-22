@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using WebApplication1.Models;
 
@@ -14,6 +15,7 @@ namespace WebApplication1
 
         public void ProcessRequest(HttpContext context)
         {
+            Thread.Sleep(600);
             string CustomerID = context.Request["CustomerID"];
 
             NorthwindEntities db = new NorthwindEntities();
