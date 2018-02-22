@@ -12,7 +12,9 @@
 
     <input id="Button3" type="button" onclick="GetAsyncPost()" value="AsyncPost" />
 
-    <input id="Button4" type="button" onclick="GetjQuery()" value="jQuery" />
+    <input id="Button4" type="button" onclick="GetjQuery()" value="GetjQuery" />
+
+    <input id="Button4" type="button" onclick="PostjQuery()" value="PostjQuery" />
 
     <img id="Progress" style="display:none;" src="images/ajax-loader .gif" />
 
@@ -84,10 +86,28 @@
         };
 
         function GetjQuery() {
-            var p = "Name=李小明&Age=20";
+            var p = encodeURI("Name=李小明&Age=20");
             $.ajax({
                 type: "GET",
                 url: "http://localhost:51513/Handler1.ashx?" + p
+            }).done(function (result) {
+                $("#MyDiv").text(result);
+            }).fail(function (err) {
+                alert(err.responseText);
+
+            });
+
+        }
+
+        function PostjQuery() {
+
+            $.ajax({
+                type: "post",
+                url: "http://localhost:51513/Handler1.ashx",
+                data: {
+                    Name: "李小明",
+                    Age: 20,
+                },
             }).done(function (result) {
                 $("#MyDiv").text(result);
             }).fail(function (err) {
